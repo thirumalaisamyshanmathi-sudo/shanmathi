@@ -1,32 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Product Video</title>
+    <title>My WhatsApp Bot</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #ece5dd;
+        }
+        .chat-box {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .user {
+            text-align: right;
+            color: blue;
+            margin: 5px;
+        }
+        .bot {
+            text-align: left;
+            color: green;
+            margin: 5px;
+        }
+        input {
+            width: 75%;
+            padding: 8px;
+        }
+        button {
+            padding: 8px;
+        }
+    </style>
 </head>
-<body style="text-align:center; font-family:Arial;">
+<body>
 
-    <h2>Our New Product</h2>
+<div class="chat-box">
+    <div class="messages" id="messages"></div>
+    <input type="text" id="input" placeholder="Type message..." />
+    <button onclick="sendMessage()">Send</button>
+</div>
 
-    <!-- Sample Video -->
-    <video width="300" controls>
-        <source src="yourvideo.mp4" type="video/mp4">
-    </video>
+<script>
+function sendMessage() {
+    let input = document.getElementById("input");
+    let message = input.value.toLowerCase();
+    let messagesDiv = document.getElementById("messages");
 
-    <br><br>
+    if(message.trim() === "") return;
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/919876543210?text=Hi%20I%20saw%20your%20video%20and%20I%20want%20more%20details" target="_blank">
-        <button style="
-            padding:12px 25px;
-            background-color:#25D366;
-            color:white;
-            border:none;
-            border-radius:30px;
-            font-size:16px;
-            cursor:pointer;">
-            💬 Chat on WhatsApp
-        </button>
-    </a>
+    messagesDiv.innerHTML += `<div class="user">${message}</div>`;
+
+    let reply = "";
+
+    if(message === "hi") {
+        reply = "🛍 Product Name: Premium Watch\n💰 Price: ₹999\n🚚 Free Delivery Available";
+    } else {
+        reply = "Please type 'hi' to see product details.";
+    }
+
+    messagesDiv.innerHTML += `<div class="bot">${reply}</div>`;
+
+    input.value = "";
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+</script>
 
 </body>
 </html>
